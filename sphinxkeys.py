@@ -34,11 +34,14 @@ class SphinxKeys(object):
         parser = OptionParser()
         parser.add_option("-q", "--quiet", dest="quiet", action='store_true', default=False, help="Don't print anything")
         (self.options, args) = parser.parse_args()
+        sphinxdir = os.path.dirname(sys.argv[0])
+        if sphinxdir == '':
+            sphinxdir = '.'
         self.file_macros = None
         paths = [
             os.environ['HOME'] + '/.sphinxkeys/macros',
             '/etc/sphinxkeys/macros',
-            os.path.dirname(sys.argv[0]) + '/sphinxkeys/macros'
+            sphinxdir + '/macros'
             ]
         for path in paths:
             if not self.file_macros:
@@ -52,7 +55,7 @@ class SphinxKeys(object):
         paths = [
             os.environ['HOME'] + '/.sphinxkeys/keyboard.dic',
             '/etc/sphinxkeys/keyboard.dic',
-            os.path.dirname(sys.argv[0]) + '/sphinxkeys/keyboard.dic'
+            sphinxdir + '/keyboard.dic'
             ]
         for path in paths:
             if not self.file_dictionary:
@@ -66,7 +69,7 @@ class SphinxKeys(object):
         paths = [
             os.environ['HOME'] + '/.sphinxkeys/keyboard.lm',
             '/etc/sphinxkeys/keyboard.lm',
-            os.path.dirname(sys.argv[0]) + '/sphinxkeys/keyboard.lm'
+            sphinxdir + '/keyboard.lm'
             ]
         for path in paths:
             if not self.file_language_model:
