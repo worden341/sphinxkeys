@@ -1,0 +1,108 @@
+# ABOUT SPHINXKEYS #
+
+SphinxKeys lets you essentially type keyboard keys and mouse clicks by speaking into a microphone; since most computer programs offer extensive keyboard shortcuts, you can can use SphinxKeys to control your computer.  SphinxKeys also understands a few simple commands that help you with common computer tasks such as using the clipboard or entering passwords.  SphinxKeys emphasizes simplicity and "just working" rather than attempting sophisticated language parsing, or integration with other programs.  Just think of it as typing by speaking.
+
+Please visit the project page at http://code.google.com/p/sphinxkeys/
+
+# REQUIREMENTS #
+
+Currently SphinxKeys only works on Linux due to it's dependence on xmacro to send keystrokes.  If someone can plug in an equivalent for Windows, maybe it will work there.
+
+SphinxKeys is very small program that connects many other components together.  You need these components before SphinxKeys will work.  Your Linux distribution -- if fairly current -- almost certainly has all of them available.  I run this myself on Ubuntu 10.04 "Lucid".  The packages required there are:
+
+  * gstreamer0.10-pocketsphinx:  GStreamer plugins for Pocketsphinx
+  * python-pocketsphinx:		Python hooks into Pocketsphinx
+  * xmacro:			Sends keystrokes to your screen
+  * gstreamer0.10-plugins-base:	GStreamer plugins for basic sound processing
+  * gstreamer0.10-alsa:		GStreamer plugin for ALSA, which makes your microphone work
+
+# INSTALLATION #
+
+  1. Test your microphone and make sure it works.  The program alsamixer can show you whether the microphone is enabled on your sound card.  You can use the simple programs arecord and aplay to do test recordings with your microphone.
+  1. Download the install archive and unpack it somewhere, such as /usr/local/voicekeys.
+
+
+# USAGE #
+
+  1. Run the script: python /usr/local/voicekeys/voicekeys.py  A little window with one button will appear.
+  1. Click the button
+  1. Start talking!
+
+Now let's back up a step.  SphinxKeys mainly only understands words corresponding to keys on your keyboard.  But there is a problem for a computer trying to distinguish the spoken letters b, c, d, e, g, p, etcetera: they all sound pretty similar when spoken out loud.  So instead of speaking "a", "b", "c", etcetera, we use "alpha", "bravo", "charlie", and the rest of the NATO phonetic alphabet.  You have to learn this alphabet.  Don't worry, you'll get the hang of it quickly.  The rest of the alphabet is here:  http://en.wikipedia.org/wiki/NATO_phonetic_alphabet
+
+Most of the other keyboard keys are spoken using obvious words, eg. "colon", "period", "shift", "return".  Say "mouse" to click the mouse.  Open the macros file in a text editor to see all the words SphinxKeys knows.
+
+Some other keys are spoken differently than you might expect, though.  That's because SphinxKeys (really the Sphinx voice recognition engine) has problems distinguishing certain words from background noise:
+
+  * "mouse":	click the mouse. (The word "click" by itself is often mis-heard)
+  * "number six":	6 key.
+  * "number eight": 8 key.
+  * "spacer":	space bar
+  * "alpha sign":	@ key
+  * "alter":	Alt key.
+
+You can do key combinations naturally like this:
+
+  * "control foxtrot":	Means control-F, often used for "Find" in programs.
+  * "shift alpha":		Type a capital "A".
+
+Here are some other keys and commands to know:
+
+  * "star":		Star or asterisk keyboard
+  * "foxtrot one":	F1 key. The other function keys work the same.
+  * "arrow down":	Down arrow key. The other arrows keys work the same.
+  * "start":	"Windows" key, or Meta key on Macintosh keyboards
+  * "menu":		"Menu" key; generally like right-clicking on the item where the focus or text-cursor is.
+  * "clipboard copy":  Same as "control charlie"
+  * "clipboard paste": Same as "control victor"
+  * "clipboard cut:    Same as "control x-ray"
+  * "select word":	Same as "control shift arrow right"
+  * "select line":	Same as "control shift end"
+  * "next word":	Same as "control arrow right"
+  * "back word":	Same as "control arrow left"
+  * "double click": Double click the mouse
+  * "right click":	Right click the mouse
+  * "mouse down":	Click the mouse and hold it down. Then use the arrow keys.  Then say "mouse up".
+  * "action stop":	Keep listening but do not do anything until you say "action start". This is useful when you need to talk to a person for a while without inadvertantly typing at the same time.
+  * "release":	Sometimes the control or shift key can get stuck in the down position (virtually) if you say "shift down" but forget to say "shift up".  If things seem crazy, try saying "release".
+  * "goodbye goodbye": Quit the program
+
+# CUSTOMIZE #
+
+You can customize SphinxKeys so it recognizes and responds to nearly any word in the dictionary, but you have to set up each word yourself.  This is useful for words you have to type a lot, like usernames and passwords.
+
+Let's say you have a username "wowser" that you need to enter frequently.  Here are the steps to get SphinxKeys to recognize and repond to that word:
+
+  1. First, since "wowser" is not a dictionary word, you need to give it an alias that is found in the dictionary.  An alias "user wow" would work well.
+  1. Edit the sentences file and add "user wow" at the end.
+  1. Go to the website of the creators of the Sphinx voice recognition engine, to their language model utility page:  http://www.speech.cs.cmu.edu/tools/lmtool.html
+  1. Upload your modified sentences file.  The page will return with a list of files to dowload.  These files will tell Sphinx on your computer how to recognize the phrase "user wow".
+  1. Download the files whose names end in ".lm" and ".dic"
+  1. Put these files in $HOME/.voicekeys and rename them to keyboard.lm and keyboard.dic
+  1. Edit the macros file, adding a line like this:
+USER WOW=String wowser\n
+  1. Restart SphinxKeys.  When you say "user wow", SphinxKeys will type "wowser"
+
+# PASSWORDS #
+
+It's very convenient to speak a command to type a password that you use frequently.  However, you should not type and save your password in any of the configuration files.  Instead, you give your password an alias that is named in the configuration files.  Then when SphinxKeys starts up, it will prompt you to enter the password for each alias, and SphinxKeys will remember the password while it is running, and type it out whevever you speak the alias.
+
+Example:
+
+Let's say your password for school is "easytoguess", and your work password is "worstever".
+
+Think of an alias for each password, for example "school" and "work".
+
+In the macros file, at the end is a line that says "section password".  Below that put the word "school" on one line, and "work" on another line.
+
+Edit the sentences file, adding the lines:
+password school
+password work
+
+Upload your sentences file to CMU like in the steps above, and place new copies of your keyboard.dic and keyboard.lm.
+
+Restart SphinxKeys.  It will prompt you to enter these passwords.
+
+When you need to type out your school password "easytoguess", say "password school".
+
+**WARNING**, this is not **entirely** secure (nothing is)!  Realize that if someone hears you using SphinxKeys to type your password, and you leave SphinxKeys running while you get up and leave the room, that person could sit down and say "password school", causing your password to type on the screen.
