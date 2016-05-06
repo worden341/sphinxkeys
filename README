@@ -18,6 +18,7 @@ SphinxKeys is very small program that connects many other components together.  
    gstreamer0.10-plugins-base:	GStreamer plugins for basic sound processing
    gstreamer0.10-alsa:		GStreamer plugin for ALSA, which makes your microphone work
    python-gobject2
+   python-gtk2
 
 
 ======================
@@ -126,3 +127,16 @@ Restart SphinxKeys.  It will prompt you to enter these passwords.
 When you need to type out your school password "easytoguess", say "password school".
 
 WARNING, this is not *entirely* secure (nothing is)!  Realize that if someone hears you using SphinxKeys to type your password, and you leave SphinxKeys running while you get up and leave the room, that person could sit down and say "password school", causing your password to type on the screen.
+
+
+======================
+TO DO
+
+* There is no reason for this to have a GUI. Please get rid of it.
+* python-gobject2 is deprecated in favor of python-gi.  Haven't got that to work yet. See ATTRIBUTION below, and https://github.com/smartin015/gstreamer_pocketsphinx_demo for ideas.
+
+
+=====================
+ATTRIBUTION
+
+Portions of this code were copied (in 2005) from Carnegie Mellon University: http://cmusphinx.sourceforge.net/wiki/gstreamer
