@@ -24,7 +24,7 @@ import pygst
 pygst.require('0.10')
 gobject.threads_init()
 import gst
-import curses, getpass, os, readline
+import getpass, os
 import subprocess, sys
 from optparse import OptionParser
 

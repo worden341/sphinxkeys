@@ -2,7 +2,7 @@ ABOUT SPHINXKEYS
 
 SphinxKeys lets you essentially type keyboard keys and mouse clicks by speaking into a microphone; since most computer programs offer extensive keyboard shortcuts, you can can use SphinxKeys to control your computer.  SphinxKeys also understands a few simple commands that help you with common computer tasks such as using the clipboard or entering passwords.  SphinxKeys emphasizes simplicity and "just working" rather than attempting sophisticated language parsing, or integration with other programs.  Just think of it as typing by speaking.
 
-Please visit the project page at http://code.google.com/p/sphinxkeys/
+Please visit the project page at https://github.com/worden341/sphinxkeys
 
 
 ======================
@@ -10,13 +10,14 @@ REQUIREMENTS
 
 Currently SphinxKeys only works on Linux due to it's dependence on xmacro to send keystrokes.  If someone can plug in an equivalent for Windows, maybe it will work there.
 
-SphinxKeys is very small program that connects many other components together.  You need these components before SphinxKeys will work.  Your Linux distribution -- if fairly current -- almost certainly has all of them available.  I run this myself on Ubuntu 10.04 "Lucid".  The packages required there are:
+SphinxKeys is very small program that connects many other components together.  You need these components before SphinxKeys will work.  Your Linux distribution -- if fairly current -- almost certainly has all of them available.  I run this myself on Ubuntu 14.04 "Trusty".  The packages required there are:
 
    gstreamer0.10-pocketsphinx:  GStreamer plugins for Pocketsphinx
    python-pocketsphinx:		Python hooks into Pocketsphinx
    xmacro:			Sends keystrokes to your screen
    gstreamer0.10-plugins-base:	GStreamer plugins for basic sound processing
    gstreamer0.10-alsa:		GStreamer plugin for ALSA, which makes your microphone work
+   python-gobject2
 
 
 ======================
@@ -24,13 +25,13 @@ INSTALLATION
 
 1. Test your microphone and make sure it works.  The program alsamixer can show you whether the microphone is enabled on your sound card.  You can use the simple programs arecord and aplay to do test recordings with your microphone.
 
-2. Download the install archive and unpack it somewhere, such as /usr/local/voicekeys.
+2. Download the install archive and unpack it somewhere, such as /usr/local/sphinxkeys.
 
 
 ======================
 USAGE
 
-1. Run the script: python /usr/local/voicekeys/voicekeys.py  A little window with one button will appear.
+1. Run the script: python /usr/local/sphinxkeys/sphinxkeys.py  A little window with one button will appear.
 
 2. Click the button
 
@@ -93,7 +94,7 @@ Upload your modified sentences file.  The page will return with a list of files 
 
 Download the files whose names end in ".lm" and ".dic"
 
-Put these files in $HOME/.voicekeys and rename them to keyboard.lm and keyboard.dic
+Put these files in $HOME/.sphinxkeys and rename them to keyboard.lm and keyboard.dic
 
 Edit the macros file, adding a line like this:
 USER WOW=String wowser\n
@@ -125,4 +126,3 @@ Restart SphinxKeys.  It will prompt you to enter these passwords.
 When you need to type out your school password "easytoguess", say "password school".
 
 WARNING, this is not *entirely* secure (nothing is)!  Realize that if someone hears you using SphinxKeys to type your password, and you leave SphinxKeys running while you get up and leave the room, that person could sit down and say "password school", causing your password to type on the screen.
-
